@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "food-ordering-app-backend",
+  "name": "yasin-food-ordering-app",
   "builds": [{ "src": "server.js", "use": "@vercel/node" }],
   "headers": [
     {
