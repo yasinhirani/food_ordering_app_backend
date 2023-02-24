@@ -2,5 +2,11 @@
   "version": 2,
   "name": "food_ordering_app",
   "builds": [{ "src": "server.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/server.js" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "server.js" }],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    }
+  ]
 }
