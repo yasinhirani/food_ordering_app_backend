@@ -174,11 +174,11 @@ app.post("/api/updateStep", validateToken, async (req, res) => {
     const updateOrder = Orders;
     const updateUserOrder = userOrders;
     const updateOrderStep = await updateOrder.updateOne(
-      { userEmail: req.user.email, orderId: req.body.orderId },
+      { userEmail: req.body.userEmail, orderId: req.body.orderId },
       { step: req.body.step, stepCount: req.body.stepCount }
     );
     const updateUserOrderStep = await updateUserOrder.updateOne(
-      { userEmail: req.user.email, "orders.orderId": req.body.orderId },
+      { userEmail: req.body.userEmail, "orders.orderId": req.body.orderId },
       {
         $set: {
           "orders.$.step": req.body.step,
