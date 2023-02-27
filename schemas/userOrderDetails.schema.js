@@ -7,6 +7,7 @@ const orders = {
   quantity: Number,
   step: String,
   stepCount: Number,
+  time: Date,
 };
 
 const userOrdersSchema = new mongoose.Schema({

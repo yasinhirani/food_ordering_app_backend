@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
   orderId: {
     type: String,
-    required: [true, "order id is required"]
+    required: [true, "order id is required"],
   },
   userName: {
     type: String,
@@ -36,6 +36,10 @@ const orderSchema = new mongoose.Schema({
   stepCount: {
     type: Number,
     required: [true, "Current step is required"],
+  },
+  time: {
+    type: Date,
+    required: [true, "Time is required"],
   },
 });
 

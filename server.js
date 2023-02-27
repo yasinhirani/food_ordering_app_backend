@@ -100,7 +100,10 @@ app.post("/api/login", async (req, res) => {
           userEmail: isAvailable[0].userEmail,
           userName: isAvailable[0].userName,
           role: isAvailable[0].role,
-          access_token: generateAccessToken(req.body.userEmail, isAvailable[0].role),
+          access_token: generateAccessToken(
+            req.body.userEmail,
+            isAvailable[0].role
+          ),
         },
       });
     } else {
@@ -119,8 +122,12 @@ app.get("/api/getAllOrders", validateToken, async (req, res) => {
   connectDb();
   if (req.user.role === "admin") {
     const orders = Orders;
-    const allOrders = await orders.find({});
-    res.send(allOrders);
+    await orders
+      .find({})
+      .sort("-time")
+      .exec((err, data) => {
+        res.send(data);
+      });
   }
 });
 
@@ -183,7 +190,7 @@ app.post("/api/updateStep", validateToken, async (req, res) => {
   }
 });
 
-app.post("/api/getUserOrders", validateToken, async (req, res) => {
+app.get("/api/getUserOrders", validateToken, async (req, res) => {
   const UserOrders = userOrders;
   const orders = await UserOrders.find({ userEmail: req.user.email });
   if (orders.length > 0) {
